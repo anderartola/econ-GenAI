@@ -135,30 +135,6 @@ section + section { border-top: 1px solid var(--rule-soft); }
   max-width: 38rem;
 }
 
-/* the one flourish: a rubber-stamped venue mark */
-.stamp {
-  position: absolute;
-  top: clamp(2rem, 6vw, 3.5rem);
-  right: 0;
-  display: grid;
-  place-content: center;
-  width: 8.5rem; height: 8.5rem;
-  padding: 0.5rem;
-  border: 2px solid var(--stamp);
-  border-radius: 50%;
-  color: var(--stamp);
-  font-family: var(--sans);
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1.35;
-  text-align: center;
-  transform: rotate(-11deg);
-  opacity: 0.85;
-}
-.stamp span { display: block; }
-.stamp span:first-child { font-size: 1.5rem; line-height: 1; margin-bottom: 0.15rem; }
-@media (max-width: 1216px) { .stamp { display: none; } }
-
 /* ---------- fact list ---------- */
 
 .facts {
