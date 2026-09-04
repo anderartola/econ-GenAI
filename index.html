@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Economics of Generative AI — NeurIPS 2026 Tutorial</title>
+<meta name="description" content="A NeurIPS 2026 tutorial on the economic and strategic forces acting on generative AI across training, evaluation and inference, with a closing panel on the future of work.">
+<meta property="og:title" content="Economics of Generative AI — NeurIPS 2026 Tutorial">
+<meta property="og:description" content="How data is priced, how benchmarks are gamed, and how inference is sold. A two-and-a-half-hour tutorial at NeurIPS 2026.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#overview">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="stamp" aria-hidden="true">
+      <span>2026</span>
+      <span>NeurIPS</span>
+      <span>Tutorial</span>
+    </div>
+
+    <h1>Economics of Generative AI</h1>
+    <p class="masthead__sub">A tutorial at NeurIPS 2026</p>
+    <p class="standfirst">Generative AI is rarely deployed as an isolated technology. It arrives as a marketed service, built by developers, sold by providers and used by people whose incentives do not line up. This tutorial introduces the economics of that arrangement, using game theory and mechanism design, and assumes no background in either.</p>
+
+    <dl class="facts">
+      <div>
+        <dt>Date</dt>
+        <dd>To be announced</dd>
+      </div>
+      <div>
+        <dt>Venue</dt>
+        <dd>NeurIPS 2026</dd>
+      </div>
+      <div>
+        <dt>Length</dt>
+        <dd>2 hours 30 minutes</dd>
+      </div>
+      <div>
+        <dt>Recording</dt>
+        <dd>Posted here afterwards</dd>
+      </div>
+    </dl>
+
+    <figure class="lifecycle">
+      <svg class="lifecycle" viewBox="0 0 960 320" role="img" aria-labelledby="lc-title-w lc-desc-w"
+           xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title id="lc-title-w">The lifecycle of a generative model as an economic object</title>
+        <desc id="lc-desc-w">Training, evaluation and inference sit along a line. Revenue earned at inference flows back to training, and rankings produced at evaluation steer demand towards inference.</desc>
+
+        <path id="lc-loop" fill="none" stroke="none"
+              d="M196 176 L764 176 C 764 268, 640 282, 480 282 C 320 282, 196 266, 196 176"></path>
+
+        <line class="lc-line" x1="60" y1="176" x2="900" y2="176"></line>
+
+        <a class="lc-station" href="#part-1">
+          <g>
+            <g class="lc-glyph" transform="translate(160, 60)">
+              <rect x="0" y="34" width="72" height="13" rx="2"></rect>
+              <rect x="0" y="17" width="72" height="13" rx="2"></rect>
+              <rect x="0" y="0" width="72" height="13" rx="2"></rect>
+            </g>
+            <title>Go to Part I, Training</title>
+            <rect class="lc-hit" x="120" y="46" width="152" height="126" rx="8"></rect>
+            <circle class="lc-node" cx="196" cy="176" r="7"></circle>
+            <text class="lc-title" x="196" y="138" text-anchor="middle">Training</text>
+            <text class="lc-meta" x="196" y="159" text-anchor="middle">Who is paid for the data</text>
+          </g>
+        </a>
+
+        <a class="lc-station" href="#part-2">
+          <g>
+            <g class="lc-glyph" transform="translate(444, 60)">
+              <rect x="0" y="0" width="60" height="12" rx="2"></rect>
+              <rect x="0" y="18" width="44" height="12" rx="2"></rect>
+              <rect x="0" y="36" width="28" height="12" rx="2"></rect>
+            </g>
+            <title>Go to Part II, Evaluation</title>
+            <rect class="lc-hit" x="404" y="46" width="152" height="126" rx="8"></rect>
+            <circle class="lc-node" cx="480" cy="176" r="7"></circle>
+            <text class="lc-title" x="480" y="138" text-anchor="middle">Evaluation</text>
+            <text class="lc-meta" x="480" y="159" text-anchor="middle">What the ranking rewards</text>
+          </g>
+        </a>
+
+        <a class="lc-station" href="#part-3">
+          <g>
+            <g class="lc-glyph" transform="translate(728, 66)">
+              <rect x="0" y="14" width="20" height="12" rx="2"></rect>
+              <rect x="26" y="14" width="12" height="12" rx="2"></rect>
+              <rect x="44" y="14" width="26" height="12" rx="2"></rect>
+              <rect x="76" y="14" width="14" height="12" rx="2"></rect>
+            </g>
+            <title>Go to Part III, Inference</title>
+            <rect class="lc-hit" x="688" y="46" width="152" height="126" rx="8"></rect>
+            <circle class="lc-node" cx="764" cy="176" r="7"></circle>
+            <text class="lc-title" x="764" y="138" text-anchor="middle">Inference</text>
+            <text class="lc-meta" x="764" y="159" text-anchor="middle">What a token costs</text>
+          </g>
+        </a>
+
+        <path class="lc-flow" d="M764 176 C 764 268, 640 282, 480 282 C 320 282, 196 266, 196 188"></path>
+        <path class="lc-flow" d="M203 198 l -7 -12 l -7 12" fill="none"></path>
+        <text class="lc-label" x="480" y="304" text-anchor="middle">revenue funds the next round of training</text>
+
+        <path class="lc-flow lc-flow--faint" d="M480 176 C 560 176, 600 176, 744 176"></path>
+        <path class="lc-flow" d="M743 169 l 12 7 l -12 7" fill="none"></path>
+        <text class="lc-label" x="616" y="197" text-anchor="middle">rankings steer demand</text>
+
+        <circle class="lc-mover" r="5.5">
+          <animateMotion dur="13s" begin="0s" repeatCount="indefinite" calcMode="linear">
+            <mpath href="#lc-loop" xlink:href="#lc-loop"></mpath>
+          </animateMotion>
+        </circle>
+      </svg>
+
+
+      <figcaption>Each of the first three parts follows one stage of this loop, and the fourth asks what the loop does to human work. Select a stage to jump to that part.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<nav class="subnav" aria-label="Sections">
+  <div class="wrap">
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#programme">Programme</a></li>
+      <li><a href="#panel">Panel</a></li>
+      <li><a href="#materials">Materials</a></li>
+      <li><a href="#references">References</a></li>
+      <li><a href="#presenters">Presenters</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<section id="overview">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What this tutorial is about</h2>
+    </div>
+    <p>Generative AI has become one of the largest economic undertakings in modern history: more than $700&nbsp;billion in AI investment is projected for 2026 alone. That capital is a bet not only on what these systems can do, but on the markets forming around them, and on who trains them, who pays for access, who competes, and who is displaced.</p>
+    <p>Over two and a half hours we follow a model through its economic lifecycle: how training data is priced, how benchmarks create incentives to game them, and how inference is sold. We close with a panel on what all of this does to human work. No background in game theory or economics is assumed.</p>
+  </div>
+</section>
+
+<section id="programme">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Programme</h2>
+      <p>Four parts. The first three follow the lifecycle; the fourth turns outward.</p>
+    </div>
+
+    <article class="part" id="part-1">
+      <div class="part__slug">
+        <b>Part I</b>
+        <span>35 minutes</span>
+        <em>Manuel Gomez Rodriguez</em>
+      </div>
+      <div>
+        <h3>Training</h3>
+        <p>Every model is trained on someone's data. We look at market mechanisms for compensating the people who provide it, at the pressure generative models place on human content creation online, and at fine-tuning as a cooperative game between the designers of generalist and domain-specific models.</p>
+        <ul class="threads">
+          <li>Do data valuations make good data prices?</li>
+          <li>Revenue sharing, targeted degradation, and regulatory intervention on platforms</li>
+          <li>Bargaining and preference aggregation in fine-tuning games</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="part" id="part-2">
+      <div class="part__slug">
+        <b>Part II</b>
+        <span>35 minutes</span>
+        <em>Ander Artola Velasco</em>
+      </div>
+      <div>
+        <h3>Evaluation</h3>
+        <p>A benchmark is less a measurement instrument than a set of incentives. We survey what developers do in response, then turn to mechanisms that make rankings robust to it, to metrics that fold inference cost into the score, and to what win-rate competition does to model diversity.</p>
+        <ul class="threads">
+          <li>Contamination, sandbagging, and vote rigging as strategic responses to a metric</li>
+          <li>Clone-robust rankings through maximal lotteries</li>
+          <li>Cost-of-pass and other economic evaluation metrics</li>
+          <li>Win-rate competition, homogenisation, and monoculture</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="part" id="part-3">
+      <div class="part__slug">
+        <b>Part III</b>
+        <span>35 minutes</span>
+        <em>Stratis Tsirtsis</em>
+      </div>
+      <div>
+        <h3>Inference</h3>
+        <p>Serving a model is a transaction in which the user cannot see most of what they are paying for. We cover the ways a provider can behave strategically under pay-per-token pricing, what the alternatives reward, and how competition between providers and money from advertisers shape what finally gets served.</p>
+        <ul class="threads">
+          <li>Tokenization misreporting and model substitution, and how to audit for both</li>
+          <li>Pricing regimes and what each one rewards</li>
+          <li>Adjusting test-time compute to capture demand</li>
+          <li>Ad auctions over generated text, and paying for what an AI overview replaces</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="part" id="part-4">
+      <div class="part__slug">
+        <b>Part IV</b>
+        <span>30 minutes</span>
+        <em>Survey and panel</em>
+      </div>
+      <div>
+        <h3>Generative AI and the future of work</h3>
+        <p>A short survey of the empirical evidence to date on how generative AI affects individual productivity, which is more mixed than the headline numbers suggest, followed by an open discussion with our panelists. Stratis Tsirtsis moderates.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="panel">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Panel</h2>
+      <p>Five panelists, spanning labour economics, macroeconomic policy, technology regulation, and the study of platforms and markets.</p>
+    </div>
+
+    <div class="people people--roster">
+      <div class="person">
+        <h3>Sandra Wachter</h3>
+        <p class="person__affil">Oxford Internet Institute, University of Oxford</p>
+        <p>Professor of Technology and Regulation, working on the legal and ethical governance of AI, including algorithmic bias, platform regulation and accountability.</p>
+        <p class="person__links"><a href="mailto:sandra.wachter@oii.ox.ac.uk">sandra.wachter@oii.ox.ac.uk</a></p>
+      </div>
+
+      <div class="person">
+        <h3>Roland Rathelot</h3>
+        <p class="person__affil">ENSAE, IP Paris and CREST</p>
+        <p>Professor of Economics, working on labour economics, including job search, hiring, and how AI-based recommendations affect labour-market outcomes.</p>
+        <p class="person__links"><a href="mailto:roland.rathelot@gmail.com">roland.rathelot@gmail.com</a></p>
+      </div>
+
+      <div class="person">
+        <h3>Marina Tavares</h3>
+        <p class="person__affil">International Monetary Fund</p>
+        <p>Senior Economist in the Research Department, working on the macroeconomics of automation and AI, including labour-market exposure and its distributional effects.</p>
+        <p class="person__links"><a href="mailto:marinamendestavares@gmail.com">marinamendestavares@gmail.com</a></p>
+      </div>
+
+      <div class="person">
+        <h3>Ole Teutloff</h3>
+        <p class="person__affil">Oxford Internet Institute and Copenhagen Center for Social Data Science</p>
+        <p>Postdoctoral researcher using computational social science to study how AI reshapes the skill requirements of jobs, the value of human expertise, and labour-market inequality.</p>
+        <p class="person__links"><a href="mailto:oleteutloff@gmail.com">oleteutloff@gmail.com</a></p>
+      </div>
+
+      <div class="person">
+        <h3>Ana-Andreea Stoica</h3>
+        <p class="person__affil">Max Planck Institute for Intelligent Systems</p>
+        <p>Research group leader in the Social Foundations of Computation department, working on algorithms and evaluation for systems that mediate access to information and economic opportunity, including networks, markets and digital labour platforms.</p>
+        <p class="person__links"><a href="mailto:astoica@cs.columbia.edu">astoica@cs.columbia.edu</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="materials">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Slides and materials</h2>
+      <p>Everything here stays online after the session.</p>
+    </div>
+
+    <ul class="materials">
+      <li>
+        <span>Full tutorial slides</span>
+        <span class="pending">Available at the conference</span>
+      </li>
+      <li>
+        <span>Part I — Training</span>
+        <span class="pending">Available at the conference</span>
+      </li>
+      <li>
+        <span>Part II — Evaluation</span>
+        <span class="pending">Available at the conference</span>
+      </li>
+      <li>
+        <span>Part III — Inference</span>
+        <span class="pending">Available at the conference</span>
+      </li>
+      <li>
+        <span>Written notes covering the full session</span>
+        <span class="pending">Available at the conference</span>
+      </li>
+      <li>
+        <span>Recording</span>
+        <span class="pending">After the session</span>
+      </li>
+    </ul>
+
+    <div class="callout">
+      <p>The notes are written to work either way: as something to follow during the live session, or as a transcript to read afterwards without the slides.</p>
+    </div>
+  </div>
+</section>
+
+<section id="references">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>References</h2>
+      <p>The reading list for each part, grouped by the thread it belongs to. Nothing here is required in advance.</p>
+    </div>
+
+    <p class="refpart">Background, for anyone new to game theory</p>
+    <details class="refgroup">
+      <summary>Foundations <span class="count">4</span></summary>
+      <ol>
+        <li><a href="https://www.cambridge.org/core/books/algorithmic-game-theory/0092C07CA8B724E1B1BE2238DDD66B38">Algorithmic Game Theory</a>. <cite>Nisan, Roughgarden, Tardos and Vazirani, Cambridge University Press 2007.</cite></li>
+        <li><a href="https://mitpress.mit.edu/9780262650403/a-course-in-game-theory/">A Course in Game Theory</a>. <cite>Osborne and Rubinstein, MIT Press 1994.</cite></li>
+        <li><a href="https://www.cambridge.org/core/books/twenty-lectures-on-algorithmic-game-theory/A9D9427C8F43E7DAEF8C702755B6D72B">Twenty Lectures on Algorithmic Game Theory</a>. <cite>Roughgarden, Cambridge University Press 2016.</cite></li>
+        <li><a href="https://arxiv.org/abs/2507.06268">A collectivist, economic perspective on AI</a>. <cite>Jordan, arXiv 2025.</cite></li>
+      </ol>
+    </details>
+
+    <p class="refpart">Part I — Training</p>
+    <details class="refgroup">
+      <summary>Pricing and acquiring training data <span class="count">3</span></summary>
+      <ol>
+        <li><a href="https://arxiv.org/abs/2504.05563">Do data valuations make good data prices?</a> <cite>Fan, Rotello and Karimireddy, arXiv 2025.</cite></li>
+        <li><a href="https://arxiv.org/abs/2605.07419">Incentivizing user data contributions for LLM improvement under withdrawal rights</a>. <cite>Feng, Zhang and Zhao, arXiv 2026.</cite></li>
+        <li>Selling data as a digital good with scaling valuations. <cite>Deng, Guan, Li, Wang, Xin and Zhang, ICLR 2026 Workshop AIMS.</cite></li>
+      </ol>
+    </details>
+    <details class="refgroup">
+      <summary>Human content and the platforms that host it <span class="count">5</span></summary>
+      <ol>
+        <li>Platform design when creators train their AI substitutes. <cite>Luo, Manzoor and Yang, Cornell SC Johnson College of Business Research Paper 2025.</cite></li>
+        <li><a href="https://arxiv.org/abs/2502.00729">Selective response strategies for GenAI</a>. <cite>Taitler and Ben-Porat, arXiv 2025.</cite></li>
+        <li>Braess's paradox of generative AI. <cite>Taitler and Ben-Porat, AAAI 2025.</cite></li>
+        <li>How to strategize human content creation in the era of GenAI? <cite>Esmaeili, Lim, Bhawalkar, Feng, Wang and Xu, The Web Conference 2026.</cite></li>
+        <li>Strategic content creation with GenAI: to share or not to share? <cite>Keinan and Ben-Porat, The Web Conference 2026.</cite></li>
+      </ol>
+    </details>
+    <details class="refgroup">
+      <summary>Fine-tuning as a cooperative game <span class="count">3</span></summary>
+      <ol>
+        <li>Fine-tuning games: bargaining and adaptation for general-purpose models. <cite>Laufer, Kleinberg and Heidari, The Web Conference 2024.</cite></li>
+        <li>Mechanism design for LLM fine-tuning with multiple reward models. <cite>Sun, Chen, Wang, Xu, Chen and Deng, NeurIPS 2025.</cite></li>
+        <li><a href="https://arxiv.org/abs/2503.20848">The backfiring effect of weak AI safety regulation</a>. <cite>Laufer, Kleinberg and Heidari, arXiv 2025.</cite></li>
+      </ol>
+    </details>
+
+    <p class="refpart">Part II — Evaluation</p>
+    <details class="refgroup">
+      <summary>What a benchmark actually rewards <span class="count">3</span></summary>
+      <ol>
+        <li><a href="https://aclanthology.org/2020.emnlp-main.393/">Utility is in the eye of the user: a critique of NLP leaderboards</a>. <cite>Ethayarajh and Jurafsky, EMNLP 2020.</cite></li>
+        <li><a href="https://openreview.net/forum?id=j6NxpQbREA1">AI and the everything in the whole wide world benchmark</a>. <cite>Raji, Denton, Bender, Hanna and Paullada, NeurIPS Datasets and Benchmarks 2021.</cite></li>
+        <li><a href="https://aclanthology.org/2021.naacl-main.385/">What will it take to fix benchmarking in natural language understanding?</a> <cite>Bowman and Dahl, NAACL 2021.</cite></li>
+      </ol>
+    </details>
+    <details class="refgroup">
+      <summary>Memorisation, contamination and mirages <span class="count">6</span></summary>
+      <ol>
+        <li>The ladder: a reliable leaderboard for machine learning competitions. <cite>Blum and Hardt, ICML 2015.</cite></li>
+        <li><a href="https://arxiv.org/abs/2311.01964">Don't make your LLM an evaluation benchmark cheater</a>. <cite>Zhou, Zhu, Chen, Chen, Zhao, Chen, Lin, Wen and Han, arXiv 2023.</cite></li>
+        <li><a href="https://openreview.net/forum?id=KivNpBsfAS">NLP evaluation in trouble: on the need to measure LLM data contamination for each benchmark</a>. <cite>Sainz, Campos, García-Ferrero, Etxaniz, Lopez de Lacalle and Agirre, EMNLP 2023.</cite></li>
+        <li>Proving test set contamination in black-box language models. <cite>Oren, Meister, Chatterji, Ladhak and Hashimoto, ICLR 2024.</cite></li>
+        <li>A careful examination of large language model performance on grade school arithmetic. <cite>Zhang et al., NeurIPS 2024.</cite></li>
+        <li>Are emergent abilities of large language models a mirage? <cite>Schaeffer, Miranda and Koyejo, NeurIPS 2023.</cite></li>
+      </ol>
+    </details>
+    <details class="refgroup">
+      <summary>Arena-style leaderboards <span class="count">4</span></summary>
+      <ol>
+        <li><a href="https://doi.org/10.1145/3630106.3659012">AI as a sport: on the competitive epistemologies of benchmarking</a>. <cite>Orr and Kang, FAccT 2024.</cite></li>
+        <li><a href="https://openreview.net/forum?id=5cDc71jLc1">Improving your model ranking on Chatbot Arena by vote rigging</a>. <cite>Min, Pang, Du, Liu, Cheng and Lin, ICML 2025.</cite></li>
+        <li><a href="https://proceedings.mlr.press/v267/huang25z.html">Exploring and mitigating adversarial manipulation of voting-based leaderboards</a>. <cite>Huang et al., ICML 2025.</cite></li>
+        <li>The leaderboard illusion. <cite>Singh et al., NeurIPS Datasets and Benchmarks 2025.</cite></li>
+      </ol>
+    </details>
+    <details class="refgroup">
+      <summary>Sandbagging on safety evaluations <span class="count">5</span></summary>
+      <ol>
+        <li><a href="https://arxiv.org/abs/2403.13793">Evaluating frontier models for dangerous capabilities</a>. <cite>Phuong et al., arXiv 2024.</cite></li>
+        <li>AI deception: a survey of examples, risks and potential solutions. <cite>Park, Goldstein, O'Gara, Chen and Hendrycks, Patterns 2024.</cite></li>
+        <li><a href="https://openreview.net/forum?id=KviM5k8pcP">AI control: improving safety despite intentional subversion</a>. <cite>Greenblatt, Shlegeris, Sachan and Roger, ICML 2024.</cite></li>
+        <li><a href="https://openreview.net/forum?id=nGCMLATBit">Eliciting latent knowledge from quirky language models</a>. <cite>Mallen, Brumley, Kharchenko and Belrose, COLM 2024.</cite></li>
+        <li><a href="https://openreview.net/forum?id=7Qa2SpjxIS">AI sandbagging: language models can strategically underperform on evaluations</a>. <cite>van der Weij, Hofstätter, Jaffe, Brown and Ward, ICLR 2025.</cite></li>
+      </ol>
+    </details>
+    <details class="refgroup">
+      <summary>Clones, social choice and robust rankings <span class="count">5</span></summary>
+      <ol>
+        <li>Independence of clones as a criterion for voting rules. <cite>Tideman, Social Choice and Welfare 1987.</cite></li>
+        <li><a href="https://arxiv.org/abs/2312.03121">Evaluating agents using social choice theory</a>. <cite>Lanctot et al., arXiv 2023.</cite></li>
+        <li><a href="https://openreview.net/forum?id=vbw9hSlOaG">Clone-robust AI alignment</a>. <cite>Procaccia, Schiffer and Zhang, ICML 2025.</cite></li>
+        <li><a href="https://openreview.net/forum?id=K1mAvyHhKU">Strategic candidacy in generative AI arenas</a>. <cite>Hays, Li, Flanigan and Raghavan, ICML 2026.</cite></li>
+        <li><a href="https://openreview.net/forum?id=sj5OQIMAsp">Robust AI evaluation through maximal lotteries</a>. <cite>Khalaf, Wang, Halpern, Shapira, Calmon and Procaccia, ICML 2026.</cite></li>
+      </ol>
+    </details>
+    <details class="refgroup">
+      <summary>Training on the test task <span class="count">3</span></summary>
+      <ol>
+        <li>Training on the test task confounds evaluation and emergence. <cite>Dominguez-Olmedo, Dorner and Hardt, ICLR 2025.</cite></li>
+        <li><a href="https://openreview.net/forum?id=GhgsQTb8p9">Train-before-test harmonizes language model rankings</a>. <cite>Zhang, Dominguez-Olmedo and Hardt, NeurIPS 2025 Workshop.</cite></li>
+        <li><a href="https://arxiv.org/abs/2603.08371">Leaderboard incentives: model rankings under strategic post-training</a>. <cite>Chen, Zhang and Hardt, arXiv 2026.</cite></li>
+      </ol>
+    </details>
+    <details class="refgroup">
+      <summary>What performance costs <span class="count">5</span></summary>
+      <ol>
+        <li><a href="https://aclanthology.org/2024.emnlp-main.1112/">Reasoning in token economies: budget-aware evaluation of LLM reasoning strategies</a>. <cite>Wang, Jain, Zhang, Ray, Kumar and Athiwaratkun, EMNLP 2024.</cite></li>
+        <li><a href="https://arxiv.org/abs/2507.03834">Economic evaluation of LLMs</a>. <cite>Zellinger and Thomson, arXiv 2025.</cite></li>
+        <li><a href="https://openreview.net/forum?id=MSbU3L7V00">Do not think that much for 2+3=? On the overthinking of long reasoning models</a>. <cite>Chen et al., ICML 2025.</cite></li>
+        <li><a href="https://arxiv.org/abs/2603.23971">The price reversal phenomenon: when cheaper reasoning models cost more</a>. <cite>Chen, Zhang, He, Stoica, Zaharia and Zou, arXiv 2026.</cite></li>
+        <li><a href="https://openreview.net/forum?id=vC9S20zsgN">Cost-of-pass: an economic framework for evaluating language models</a>. <cite>Erol, El, Suzgun, Yuksekgonul and Zou, ICLR 2026.</cite></li>
+      </ol>
+    </details>
+    <details class="refgroup">
+      <summary>Routing, ensembles and delegation <span class="count">4</span></summary>
+      <ol>
+        <li>RouterBench: a benchmark for multi-LLM routing systems. <cite>Hu et al., Agentic Markets Workshop at ICML 2024.</cite></li>
+        <li><a href="https://aclanthology.org/2025.naacl-long.545/">MixLLM: dynamic routing in mixed large language models</a>. <cite>Wang, Liu, Cheng, Zhao, Chen, Yu, Fu and Chen, NAACL 2025.</cite></li>
+        <li><a href="https://doi.org/10.14778/3749646.3749702">ThriftLLM: on cost-effective selection of large language models for classification queries</a>. <cite>Huang, Shi, Ding, Li, Fei, Lakshmanan and Xiao, VLDB 2025.</cite></li>
+        <li><a href="https://arxiv.org/abs/2603.17212">Adaptive contracts for cost-effective AI delegation</a>. <cite>Saig, Garbuz, Procaccia, Talgam-Cohen and Tucker-Foltz, arXiv 2026.</cite></li>
+      </ol>
+    </details>
+    <details class="refgroup">
+      <summary>Homogenisation and algorithmic monoculture <span class="count">8</span></summary>
+      <ol>
+        <li><a href="https://arxiv.org/abs/2602.23293">Impacts of aggregation on model diversity and consumer utility</a>. <cite>Donahue and Raghavan, arXiv 2026.</cite></li>
+        <li><a href="https://arxiv.org/abs/2412.08610">Competition and diversity in generative AI</a>. <cite>Raghavan, arXiv 2024.</cite></li>
+        <li><a href="https://openreview.net/forum?id=T7c5LXuebY">Market games for generative models: equilibria, welfare and strategic entry</a>. <cite>Wei, Shi and Zhang, ICLR 2026.</cite></li>
+        <li>Algorithmic monoculture and social welfare. <cite>Kleinberg and Raghavan, PNAS 2021.</cite></li>
+        <li>Picking on the same person: does algorithmic monoculture lead to outcome homogenization? <cite>Bommasani, Creel, Kumar, Jurafsky and Liang, NeurIPS 2022.</cite></li>
+        <li><a href="https://openreview.net/forum?id=3Z827FtMNe">Great models think alike and this undermines AI oversight</a>. <cite>Goel et al., ICML 2025.</cite></li>
+        <li><a href="https://openreview.net/forum?id=kzYq2hfyHB">Correlated errors in large language models</a>. <cite>Kim, Garg, Peng and Garg, ICML 2025.</cite></li>
+        <li>Generative monoculture in large language models. <cite>Wu, Black and Chandrasekaran, ICLR 2025.</cite></li>
+      </ol>
+    </details>
+
+    <p class="refpart">Part III — Inference</p>
+    <details class="refgroup">
+      <summary>Provider incentives and how inference is priced <span class="count">6</span></summary>
+      <ol>
+        <li>Is your LLM overcharging you? Tokenization, transparency and incentives. <cite>Artola Velasco, Tsirtsis, Okati and Gomez-Rodriguez, ICML 2026.</cite></li>
+        <li>Incentivizing quality text generation via statistical contracts. <cite>Saig, Einav and Talgam-Cohen, NeurIPS 2024.</cite></li>
+        <li><a href="https://arxiv.org/abs/2606.16100">Your "pro" LLM subscription may actually be "free": exposing fingerprint spoofing risks in LLM inference services</a>. <cite>Zhang, Li and Wang, arXiv 2026.</cite></li>
+        <li>Pricing AI as a service. <cite>Lobel, Sun and Wu, SSRN 2026.</cite></li>
+        <li>Value-based pricing of LLMs: a three-dimensional framework for input, model and output costs. <cite>Patias and Robev, ICICT 2026.</cite></li>
+        <li><a href="https://arxiv.org/abs/2502.07736">The economics of large language models: token allocation, fine-tuning and optimal pricing</a>. <cite>Bergemann, Bonatti and Smolin, arXiv 2025.</cite></li>
+      </ol>
+    </details>
+    <details class="refgroup">
+      <summary>Auditing what you were served <span class="count">2</span></summary>
+      <ol>
+        <li>Auditing pay-per-token in large language models. <cite>Artola Velasco, Tsirtsis and Gomez-Rodriguez, AISTATS 2025.</cite></li>
+        <li><a href="https://arxiv.org/abs/2504.04715">Are you getting what you pay for? Auditing model substitution in LLM APIs</a>. <cite>Cai, Shi, Zhao and Song, arXiv 2025.</cite></li>
+      </ol>
+    </details>
+    <details class="refgroup">
+      <summary>Competition between providers <span class="count">4</span></summary>
+      <ol>
+        <li>Pricing and competition for generative AI. <cite>Mahmood, NeurIPS 2024.</cite></li>
+        <li><a href="https://arxiv.org/abs/2601.21839">Test-time compute games</a>. <cite>Artola Velasco, Rontogiannis, Tsirtsis and Gomez-Rodriguez, arXiv 2026.</cite></li>
+        <li>Pay for the second-best service: a game-theoretic approach against dishonest LLM providers. <cite>Cao, Wang, Liu, Li, Tao and He, The Web Conference 2026.</cite></li>
+        <li><a href="https://arxiv.org/abs/2603.22404">Computational arbitrage in AI model markets</a>. <cite>Olmedo, Schölkopf and Hardt, arXiv 2026.</cite></li>
+      </ol>
+    </details>
+    <details class="refgroup">
+      <summary>Advertisers, publishers and everyone else in the loop <span class="count">7</span></summary>
+      <ol>
+        <li>Mechanism design for large language models. <cite>Duetting, Mirrokni, Paes Leme, Xu and Zuo, The Web Conference 2024.</cite></li>
+        <li>Ad auctions for LLMs via retrieval augmented generation. <cite>Hajiaghayi, Lahaie, Rezaei and Shin, NeurIPS 2024.</cite></li>
+        <li>Position auctions in AI-generated content. <cite>Balseiro et al., The Web Conference 2026.</cite></li>
+        <li>Truthful aggregation of LLMs with an application to online advertising. <cite>Soumalias, Curry and Seuken, NeurIPS 2026.</cite></li>
+        <li><a href="https://arxiv.org/abs/2601.19435">Ad insertion in LLM-generated responses</a>. <cite>Xu, Chen, Deng, Huang and Schoenebeck, arXiv 2026.</cite></li>
+        <li><a href="https://arxiv.org/abs/2605.10964">Mechanism design for quality-preserving LLM advertising</a>. <cite>Han and Dai, arXiv 2026.</cite></li>
+        <li><a href="https://arxiv.org/abs/2601.22493">Do AI overviews benefit search engines? An ecosystem perspective</a>. <cite>Wu, Tang, Liu, Xu and Yao, arXiv 2026.</cite></li>
+      </ol>
+    </details>
+
+    <p class="refpart">Part IV — The future of work</p>
+    <details class="refgroup">
+      <summary>Evidence on productivity and labour <span class="count">6</span></summary>
+      <ol>
+        <li>Generative AI at work. <cite>Brynjolfsson, Li and Raymond, Quarterly Journal of Economics 2025.</cite></li>
+        <li>Experimental evidence on the productivity effects of generative artificial intelligence. <cite>Noy and Zhang, Science 2023.</cite></li>
+        <li><a href="https://arxiv.org/abs/2601.20245">How AI impacts skill formation</a>. <cite>Shen and Tamkin, arXiv 2026.</cite></li>
+        <li><a href="https://arxiv.org/abs/2507.09089">Measuring the impact of early-2025 AI on experienced open-source developer productivity</a>. <cite>Becker, Rush, Barnes and Rein, arXiv 2025.</cite></li>
+        <li>Interval cancer, sensitivity and specificity comparing AI-supported mammography screening with standard double reading: the MASAI study. <cite>Gommers et al., The Lancet 2026.</cite></li>
+        <li>Does generative AI narrow education-based productivity gaps? Evidence from a randomized experiment. <cite>Cruces, Fernández Meijide, Galiani, Gálvez and Lombardi, NBER 2026.</cite></li>
+      </ol>
+    </details>
+    <details class="refgroup">
+      <summary>Scale and policy context <span class="count">3</span></summary>
+      <ol>
+        <li><a href="https://www.goldmansachs.com/insights/articles/tracking-trillions-the-assumptions-shaping-scale-of-the-ai-build-out">Tracking trillions: the assumptions shaping the scale of the AI build-out</a>. <cite>Goldman Sachs Global Institute 2026.</cite></li>
+        <li>The 2026 AI Index Report. <cite>Stanford Institute for Human-Centered Artificial Intelligence 2026.</cite></li>
+        <li><a href="http://dx.doi.org/10.5089/9798229008570.001">The global impact of AI</a>. <cite>Cerutti, Garcia Pascual, Kido, Li, Melina, Mendes Tavares and Wingender, IMF Working Papers 2025.</cite></li>
+      </ol>
+    </details>
+  </div>
+</section>
+
+<section id="presenters">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Presenters</h2>
+      <p>All three will present in person.</p>
+    </div>
+
+    <div class="people">
+      <div class="person">
+        <img class="person__photo" src="assets/photos/ander.jpg" alt="Ander Artola Velasco" data-initials="AA">
+        <h3>Ander Artola Velasco</h3>
+        <p class="person__affil">Max Planck Institute for Software Systems</p>
+        <p>Ander is a Ph.D. candidate at MPI-SWS. He works on the strategic and economic incentives inside machine learning systems, and on building mechanisms that align those systems with better social outcomes.</p>
+        <p class="person__links">
+          <a href="https://scholar.google.com/">Google Scholar</a>
+          <a href="https://icml.cc/virtual/2026/oral/71102">Recent talk</a>
+          <a href="mailto:CHANGE-ME@mpi-sws.org">Email</a>
+        </p>
+      </div>
+
+      <div class="person">
+        <img class="person__photo" src="assets/photos/stratis.jpg" alt="Stratis Tsirtsis" data-initials="ST">
+        <h3>Stratis Tsirtsis</h3>
+        <p class="person__affil">Hasso Plattner Institute</p>
+        <p>Stratis is a postdoctoral researcher at HPI. He develops machine learning methods grounded in game theory, causality and optimization to understand and improve the social impact of AI. He has taught a tutorial at UAI and co-organised workshops at ICML and ELLIS.</p>
+        <p class="person__links">
+          <a href="https://stsirtsis.github.io/">Website</a>
+          <a href="https://www.youtube.com/watch?v=7SNmoejlx0M">Recent talk</a>
+          <a href="mailto:CHANGE-ME@hpi.de">Email</a>
+        </p>
+      </div>
+
+      <div class="person">
+        <img class="person__photo" src="assets/photos/manuel.jpg" alt="Manuel Gomez Rodriguez" data-initials="MG">
+        <h3>Manuel Gomez Rodriguez</h3>
+        <p class="person__affil">Max Planck Institute for Software Systems</p>
+        <p>Manuel is a faculty member at MPI-SWS, where he develops human-centred models and algorithms for the analysis, modelling and control of social, information and networked systems. His work has been recognised with an ERC Consolidator Grant, an ERC Starting Grant and an outstanding paper award at NeurIPS.</p>
+        <p class="person__links">
+          <a href="https://people.mpi-sws.org/~manuelgr/">Website</a>
+          <a href="https://citius.gal/videos/lecture-improving-decision-making-with-machine-learning-provably/">Recent talk</a>
+          <a href="mailto:manuelgr@mpi-sws.org">Email</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h4>Who the tutorial is for</h4>
+      <p>Researchers working on generative modelling who want a clearer view of the economic forces acting on the systems they train and deploy, and researchers in game theory, mechanism design, multi-agent systems and strategic machine learning who want to see which questions this setting opens up. Practitioners working on governance and regulation should find the second and third parts directly useful.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <ul>
+      <li><a href="mailto:CHANGE-ME@mpi-sws.org">Contact</a></li>
+      <li><a href="https://neurips.cc/">NeurIPS 2026</a></li>
+      <li><a href="#materials">Materials</a></li>
+    </ul>
+    <p>Economics of Generative AI is a tutorial at NeurIPS 2026, presented by Ander Artola Velasco, Stratis Tsirtsis and Manuel Gomez Rodriguez. Page last updated September 2026.</p>
+  </div>
+</footer>
+
+<script src="assets/js/site.js"></script>
+</body>
+</html>
