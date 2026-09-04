@@ -21,7 +21,7 @@
   <div class="wrap">
     <h1>Economics of Generative AI</h1>
     <p class="masthead__sub">A tutorial at NeurIPS 2026</p>
-    <p class="standfirst">Generative AI is rarely deployed as an isolated technology. It arrives as a marketed service, built by developers, sold by providers and used by people whose incentives do not line up. This tutorial introduces the economics of that arrangement, using game theory and mechanism design, and assumes no background in either.</p>
+    <p class="standfirst">Generative AI is rarely deployed as an isolated technology. It arrives as a marketed service, built by developers, sold by providers and used by people whose incentives do not line up. This tutorial introduces the economics of that arrangement, using game theory and mechanism design.</p>
 
     <dl class="facts">
       <div>
@@ -30,11 +30,11 @@
       </div>
       <div>
         <dt>Venue</dt>
-        <dd>NeurIPS 2026</dd>
+        <dd>NeurIPS 2026 (Paris)</dd>
       </div>
       <div>
         <dt>Length</dt>
-        <dd>2 hours 30 minutes</dd>
+        <dd>2 hours</dd>
       </div>
       <div>
         <dt>Recording</dt>
@@ -42,70 +42,72 @@
       </div>
     </dl>
 
+    <div class="masthead__diagram">
     <figure class="lifecycle">
-      <svg class="lifecycle" viewBox="0 0 960 320" role="img" aria-labelledby="lc-title-w lc-desc-w"
+      <svg class="lifecycle" viewBox="0 0 960 790" role="img" aria-labelledby="lc-title-w lc-desc-w"
            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <title id="lc-title-w">The lifecycle of a generative model as an economic object</title>
-        <desc id="lc-desc-w">Training, evaluation and inference sit along a line. Revenue earned at inference flows back to training, and rankings produced at evaluation steer demand towards inference.</desc>
+        <title id="lc-title-w"> </title>
+        <desc id="lc-desc-w">Training, evaluation and inference sit at the vertices of a triangle, each feeding into the next. Revenue earned at inference flows back to training, and rankings produced at evaluation steer demand towards inference.</desc>
 
         <path id="lc-loop" fill="none" stroke="none"
-              d="M196 176 L764 176 C 764 268, 640 282, 480 282 C 320 282, 196 266, 196 176"></path>
+              d="M480 150 L196 642 L764 642 Z"></path>
 
-        <line class="lc-line" x1="60" y1="176" x2="900" y2="176"></line>
+        <polygon class="lc-line" fill="none" points="480,150 196,642 764,642"></polygon>
 
         <a class="lc-station" href="#part-1">
           <g>
-            <g class="lc-glyph" transform="translate(160, 60)">
+            <g class="lc-glyph" transform="translate(444, 34)">
               <rect x="0" y="34" width="72" height="13" rx="2"></rect>
               <rect x="0" y="17" width="72" height="13" rx="2"></rect>
               <rect x="0" y="0" width="72" height="13" rx="2"></rect>
             </g>
             <title>Go to Part I, Training</title>
-            <rect class="lc-hit" x="120" y="46" width="152" height="126" rx="8"></rect>
-            <circle class="lc-node" cx="196" cy="176" r="7"></circle>
-            <text class="lc-title" x="196" y="138" text-anchor="middle">Training</text>
-            <text class="lc-meta" x="196" y="159" text-anchor="middle">Who is paid for the data</text>
+            <rect class="lc-hit" x="404" y="20" width="152" height="126" rx="8"></rect>
+            <circle class="lc-node" cx="480" cy="150" r="7"></circle>
+            <text class="lc-title" x="480" y="112" text-anchor="middle">Training</text>
+            <text class="lc-meta" x="480" y="133" text-anchor="middle">Who is paid for the data</text>
           </g>
         </a>
 
         <a class="lc-station" href="#part-2">
           <g>
-            <g class="lc-glyph" transform="translate(444, 60)">
+            <g class="lc-glyph" transform="translate(160, 712)">
               <rect x="0" y="0" width="60" height="12" rx="2"></rect>
               <rect x="0" y="18" width="44" height="12" rx="2"></rect>
               <rect x="0" y="36" width="28" height="12" rx="2"></rect>
             </g>
             <title>Go to Part II, Evaluation</title>
-            <rect class="lc-hit" x="404" y="46" width="152" height="126" rx="8"></rect>
-            <circle class="lc-node" cx="480" cy="176" r="7"></circle>
-            <text class="lc-title" x="480" y="138" text-anchor="middle">Evaluation</text>
-            <text class="lc-meta" x="480" y="159" text-anchor="middle">What the ranking rewards</text>
+            <rect class="lc-hit" x="120" y="646" width="152" height="126" rx="8"></rect>
+            <circle class="lc-node" cx="196" cy="642" r="7"></circle>
+            <text class="lc-title" x="196" y="676" text-anchor="middle">Evaluation</text>
+            <text class="lc-meta" x="196" y="697" text-anchor="middle">What the ranking rewards</text>
           </g>
         </a>
 
         <a class="lc-station" href="#part-3">
           <g>
-            <g class="lc-glyph" transform="translate(728, 66)">
+            <g class="lc-glyph" transform="translate(728, 712)">
               <rect x="0" y="14" width="20" height="12" rx="2"></rect>
               <rect x="26" y="14" width="12" height="12" rx="2"></rect>
               <rect x="44" y="14" width="26" height="12" rx="2"></rect>
               <rect x="76" y="14" width="14" height="12" rx="2"></rect>
             </g>
             <title>Go to Part III, Inference</title>
-            <rect class="lc-hit" x="688" y="46" width="152" height="126" rx="8"></rect>
-            <circle class="lc-node" cx="764" cy="176" r="7"></circle>
-            <text class="lc-title" x="764" y="138" text-anchor="middle">Inference</text>
-            <text class="lc-meta" x="764" y="159" text-anchor="middle">What a token costs</text>
+            <rect class="lc-hit" x="688" y="646" width="152" height="126" rx="8"></rect>
+            <circle class="lc-node" cx="764" cy="642" r="7"></circle>
+            <text class="lc-title" x="764" y="676" text-anchor="middle">Inference</text>
+            <text class="lc-meta" x="764" y="697" text-anchor="middle">What a token costs</text>
           </g>
         </a>
 
-        <path class="lc-flow" d="M764 176 C 764 268, 640 282, 480 282 C 320 282, 196 266, 196 188"></path>
-        <path class="lc-flow" d="M203 198 l -7 -12 l -7 12" fill="none"></path>
-        <text class="lc-label" x="480" y="304" text-anchor="middle">revenue funds the next round of training</text>
+        <path class="lc-flow" d="M759 633 L490 168"></path>
+        <path class="lc-flow" d="M484 172 L485 158 L497 165" fill="none"></path>
 
-        <path class="lc-flow lc-flow--faint" d="M480 176 C 560 176, 600 176, 744 176"></path>
-        <path class="lc-flow" d="M743 169 l 12 7 l -12 7" fill="none"></path>
-        <text class="lc-label" x="616" y="197" text-anchor="middle">rankings steer demand</text>
+        <path class="lc-flow lc-flow--faint" d="M475 159 L207 624"></path>
+        <path class="lc-flow" d="M213 627 L201 634 L200 620" fill="none"></path>
+
+        <path class="lc-flow lc-flow--faint" d="M206 642 L743 642"></path>
+        <path class="lc-flow" d="M743 635 L755 642 L743 649" fill="none"></path>
 
         <circle class="lc-mover" r="5.5">
           <animateMotion dur="13s" begin="0s" repeatCount="indefinite" calcMode="linear">
@@ -115,8 +117,14 @@
       </svg>
 
 
-      <figcaption>Each of the first three parts follows one stage of this loop, and the fourth asks what the loop does to human work. Select a stage to jump to that part.</figcaption>
+      <figcaption></figcaption>
     </figure>
+
+    <div class="callout">
+      <h4>Who the tutorial is for</h4>
+      <p>Researchers working on generative AI who want a clearer view of the economic forces acting on the systems they train and deploy, and researchers in game theory, mechanism design, multi-agent systems and strategic machine learning who want to see which questions this setting opens up. Practitioners working on governance and regulation should find the second and third parts directly useful.</p>
+    </div>
+    </div>
   </div>
 </header>
 
@@ -141,7 +149,7 @@
       <h2>What this tutorial is about</h2>
     </div>
     <p>Generative AI has become one of the largest economic undertakings in modern history: more than $700&nbsp;billion in AI investment is projected for 2026 alone. That capital is a bet not only on what these systems can do, but on the markets forming around them, and on who trains them, who pays for access, who competes, and who is displaced.</p>
-    <p>Over two and a half hours we follow a model through its economic lifecycle: how training data is priced, how benchmarks create incentives to game them, and how inference is sold. We close with a panel on what all of this does to human work. No background in game theory or economics is assumed.</p>
+    <p>Over two hours we follow a model through its economic lifecycle: how training data is priced, how benchmarks create incentives to game them, and how inference is sold. We close with a panel on what all of this does to human work. No background in game theory or economics is assumed.</p>
   </div>
 </section>
 
@@ -149,7 +157,7 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Programme</h2>
-      <p>Four parts. The first three follow the lifecycle; the fourth turns outward.</p>
+      <p></p>
     </div>
 
     <article class="part" id="part-1">
@@ -159,7 +167,7 @@
         <em>Manuel Gomez Rodriguez</em>
       </div>
       <div>
-        <h3>Training</h3>
+        <h3><svg class="part-icon" viewBox="0 0 72 47" aria-hidden="true"><rect x="0" y="34" width="72" height="13" rx="2"></rect><rect x="0" y="17" width="72" height="13" rx="2"></rect><rect x="0" y="0" width="72" height="13" rx="2"></rect></svg>Training</h3>
         <p>Every model is trained on someone's data. We look at market mechanisms for compensating the people who provide it, at the pressure generative models place on human content creation online, and at fine-tuning as a cooperative game between the designers of generalist and domain-specific models.</p>
         <ul class="threads">
           <li>Do data valuations make good data prices?</li>
@@ -176,7 +184,7 @@
         <em>Ander Artola Velasco</em>
       </div>
       <div>
-        <h3>Evaluation</h3>
+        <h3><svg class="part-icon" viewBox="0 0 60 48" aria-hidden="true"><rect x="0" y="0" width="60" height="12" rx="2"></rect><rect x="0" y="18" width="44" height="12" rx="2"></rect><rect x="0" y="36" width="28" height="12" rx="2"></rect></svg>Evaluation</h3>
         <p>A benchmark is less a measurement instrument than a set of incentives. We survey what developers do in response, then turn to mechanisms that make rankings robust to it, to metrics that fold inference cost into the score, and to what win-rate competition does to model diversity.</p>
         <ul class="threads">
           <li>Contamination, sandbagging, and vote rigging as strategic responses to a metric</li>
@@ -194,7 +202,7 @@
         <em>Stratis Tsirtsis</em>
       </div>
       <div>
-        <h3>Inference</h3>
+        <h3><svg class="part-icon" viewBox="0 0 90 26" aria-hidden="true"><rect x="0" y="14" width="20" height="12" rx="2"></rect><rect x="26" y="14" width="12" height="12" rx="2"></rect><rect x="44" y="14" width="26" height="12" rx="2"></rect><rect x="76" y="14" width="14" height="12" rx="2"></rect></svg>Inference</h3>
         <p>Serving a model is a transaction in which the user cannot see most of what they are paying for. We cover the ways a provider can behave strategically under pay-per-token pricing, what the alternatives reward, and how competition between providers and money from advertisers shape what finally gets served.</p>
         <ul class="threads">
           <li>Tokenization misreporting and model substitution, and how to audit for both</li>
@@ -212,7 +220,7 @@
         <em>Survey and panel</em>
       </div>
       <div>
-        <h3>Generative AI and the future of work</h3>
+        <h3><svg class="part-icon" viewBox="0 0 60 40" aria-hidden="true"><rect x="0" y="0" width="40" height="24" rx="8"></rect><rect x="20" y="16" width="40" height="24" rx="8" stroke="var(--ledger)" stroke-width="3" paint-order="stroke"></rect></svg>Generative AI and the future of work</h3>
         <p>A short survey of the empirical evidence to date on how generative AI affects individual productivity, which is more mixed than the headline numbers suggest, followed by an open discussion with our panelists. Stratis Tsirtsis moderates.</p>
       </div>
     </article>
@@ -231,35 +239,30 @@
         <h3>Sandra Wachter</h3>
         <p class="person__affil">Oxford Internet Institute, University of Oxford</p>
         <p>Professor of Technology and Regulation, working on the legal and ethical governance of AI, including algorithmic bias, platform regulation and accountability.</p>
-        <p class="person__links"><a href="mailto:sandra.wachter@oii.ox.ac.uk">sandra.wachter@oii.ox.ac.uk</a></p>
       </div>
 
       <div class="person">
         <h3>Roland Rathelot</h3>
         <p class="person__affil">ENSAE, IP Paris and CREST</p>
         <p>Professor of Economics, working on labour economics, including job search, hiring, and how AI-based recommendations affect labour-market outcomes.</p>
-        <p class="person__links"><a href="mailto:roland.rathelot@gmail.com">roland.rathelot@gmail.com</a></p>
       </div>
 
       <div class="person">
         <h3>Marina Tavares</h3>
         <p class="person__affil">International Monetary Fund</p>
         <p>Senior Economist in the Research Department, working on the macroeconomics of automation and AI, including labour-market exposure and its distributional effects.</p>
-        <p class="person__links"><a href="mailto:marinamendestavares@gmail.com">marinamendestavares@gmail.com</a></p>
       </div>
 
       <div class="person">
         <h3>Ole Teutloff</h3>
         <p class="person__affil">Oxford Internet Institute and Copenhagen Center for Social Data Science</p>
         <p>Postdoctoral researcher using computational social science to study how AI reshapes the skill requirements of jobs, the value of human expertise, and labour-market inequality.</p>
-        <p class="person__links"><a href="mailto:oleteutloff@gmail.com">oleteutloff@gmail.com</a></p>
       </div>
 
       <div class="person">
         <h3>Ana-Andreea Stoica</h3>
         <p class="person__affil">Max Planck Institute for Intelligent Systems</p>
         <p>Research group leader in the Social Foundations of Computation department, working on algorithms and evaluation for systems that mediate access to information and economic opportunity, including networks, markets and digital labour platforms.</p>
-        <p class="person__links"><a href="mailto:astoica@cs.columbia.edu">astoica@cs.columbia.edu</a></p>
       </div>
     </div>
   </div>
@@ -269,7 +272,7 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Slides and materials</h2>
-      <p>Everything here stays online after the session.</p>
+      <p></p>
     </div>
 
     <ul class="materials">
@@ -309,21 +312,25 @@
   <div class="wrap">
     <div class="section-head">
       <h2>References</h2>
-      <p>The reading list for each part, grouped by the thread it belongs to. Nothing here is required in advance.</p>
+      <p>A non-exhaustive list of references relevant for the tutorial, grouped by the thread it belongs to.</p>
     </div>
 
-    <p class="refpart">Background, for anyone new to game theory</p>
+    <details class="refpart-group">
+      <summary class="refpart">Motivation</summary>
     <details class="refgroup">
-      <summary>Foundations <span class="count">4</span></summary>
+      <summary>Scale, investment and early evidence <span class="count">5</span></summary>
       <ol>
-        <li><a href="https://www.cambridge.org/core/books/algorithmic-game-theory/0092C07CA8B724E1B1BE2238DDD66B38">Algorithmic Game Theory</a>. <cite>Nisan, Roughgarden, Tardos and Vazirani, Cambridge University Press 2007.</cite></li>
-        <li><a href="https://mitpress.mit.edu/9780262650403/a-course-in-game-theory/">A Course in Game Theory</a>. <cite>Osborne and Rubinstein, MIT Press 1994.</cite></li>
-        <li><a href="https://www.cambridge.org/core/books/twenty-lectures-on-algorithmic-game-theory/A9D9427C8F43E7DAEF8C702755B6D72B">Twenty Lectures on Algorithmic Game Theory</a>. <cite>Roughgarden, Cambridge University Press 2016.</cite></li>
+        <li><a href="https://www.goldmansachs.com/insights/articles/tracking-trillions-the-assumptions-shaping-scale-of-the-ai-build-out">Tracking trillions: the assumptions shaping the scale of the AI build-out</a>. <cite>Goldman Sachs Global Institute 2026.</cite></li>
+        <li>The 2026 AI Index Report. <cite>Stanford Institute for Human-Centered Artificial Intelligence 2026.</cite></li>
         <li><a href="https://arxiv.org/abs/2507.06268">A collectivist, economic perspective on AI</a>. <cite>Jordan, arXiv 2025.</cite></li>
+        <li>Labor market impacts of AI: a new measure and early evidence. <cite>Massenkoff and McCrory, Anthropic Research 2026.</cite></li>
+        <li><a href="http://dx.doi.org/10.5089/9798229008570.001">The global impact of AI</a>. <cite>Cerutti, Garcia Pascual, Kido, Li, Melina, Mendes Tavares and Wingender, IMF Working Papers 2025.</cite></li>
       </ol>
     </details>
+    </details>
 
-    <p class="refpart">Part I — Training</p>
+    <details class="refpart-group">
+      <summary class="refpart">Part I — Training<svg class="refpart-icon" viewBox="0 0 72 47" aria-hidden="true"><rect x="0" y="34" width="72" height="13" rx="2"></rect><rect x="0" y="17" width="72" height="13" rx="2"></rect><rect x="0" y="0" width="72" height="13" rx="2"></rect></svg></summary>
     <details class="refgroup">
       <summary>Pricing and acquiring training data <span class="count">3</span></summary>
       <ol>
@@ -350,8 +357,10 @@
         <li><a href="https://arxiv.org/abs/2503.20848">The backfiring effect of weak AI safety regulation</a>. <cite>Laufer, Kleinberg and Heidari, arXiv 2025.</cite></li>
       </ol>
     </details>
+    </details>
 
-    <p class="refpart">Part II — Evaluation</p>
+    <details class="refpart-group">
+      <summary class="refpart">Part II — Evaluation<svg class="refpart-icon" viewBox="0 0 60 48" aria-hidden="true"><rect x="0" y="0" width="60" height="12" rx="2"></rect><rect x="0" y="18" width="44" height="12" rx="2"></rect><rect x="0" y="36" width="28" height="12" rx="2"></rect></svg></summary>
     <details class="refgroup">
       <summary>What a benchmark actually rewards <span class="count">3</span></summary>
       <ol>
@@ -440,8 +449,10 @@
         <li>Generative monoculture in large language models. <cite>Wu, Black and Chandrasekaran, ICLR 2025.</cite></li>
       </ol>
     </details>
+    </details>
 
-    <p class="refpart">Part III — Inference</p>
+    <details class="refpart-group">
+      <summary class="refpart">Part III — Inference<svg class="refpart-icon" viewBox="0 0 90 26" aria-hidden="true"><rect x="0" y="14" width="20" height="12" rx="2"></rect><rect x="26" y="14" width="12" height="12" rx="2"></rect><rect x="44" y="14" width="26" height="12" rx="2"></rect><rect x="76" y="14" width="14" height="12" rx="2"></rect></svg></summary>
     <details class="refgroup">
       <summary>Provider incentives and how inference is priced <span class="count">6</span></summary>
       <ol>
@@ -481,8 +492,10 @@
         <li><a href="https://arxiv.org/abs/2601.22493">Do AI overviews benefit search engines? An ecosystem perspective</a>. <cite>Wu, Tang, Liu, Xu and Yao, arXiv 2026.</cite></li>
       </ol>
     </details>
+    </details>
 
-    <p class="refpart">Part IV — The future of work</p>
+    <details class="refpart-group">
+      <summary class="refpart">Part IV — Panel on the Future of Work<svg class="refpart-icon" viewBox="0 0 60 40" aria-hidden="true"><rect x="0" y="0" width="40" height="24" rx="8"></rect><rect x="20" y="16" width="40" height="24" rx="8" stroke="var(--ledger)" stroke-width="3" paint-order="stroke"></rect></svg></summary>
     <details class="refgroup">
       <summary>Evidence on productivity and labour <span class="count">6</span></summary>
       <ol>
@@ -494,13 +507,6 @@
         <li>Does generative AI narrow education-based productivity gaps? Evidence from a randomized experiment. <cite>Cruces, Fernández Meijide, Galiani, Gálvez and Lombardi, NBER 2026.</cite></li>
       </ol>
     </details>
-    <details class="refgroup">
-      <summary>Scale and policy context <span class="count">3</span></summary>
-      <ol>
-        <li><a href="https://www.goldmansachs.com/insights/articles/tracking-trillions-the-assumptions-shaping-scale-of-the-ai-build-out">Tracking trillions: the assumptions shaping the scale of the AI build-out</a>. <cite>Goldman Sachs Global Institute 2026.</cite></li>
-        <li>The 2026 AI Index Report. <cite>Stanford Institute for Human-Centered Artificial Intelligence 2026.</cite></li>
-        <li><a href="http://dx.doi.org/10.5089/9798229008570.001">The global impact of AI</a>. <cite>Cerutti, Garcia Pascual, Kido, Li, Melina, Mendes Tavares and Wingender, IMF Working Papers 2025.</cite></li>
-      </ol>
     </details>
   </div>
 </section>
@@ -509,7 +515,7 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Presenters</h2>
-      <p>All three will present in person.</p>
+      <p></p>
     </div>
 
     <div class="people">
@@ -528,7 +534,7 @@
         <img class="person__photo" src="assets/photos/stratis.jpg" alt="Stratis Tsirtsis" data-initials="ST">
         <h3>Stratis Tsirtsis</h3>
         <p class="person__affil">Hasso Plattner Institute</p>
-        <p>Stratis is a postdoctoral researcher at HPI. He develops machine learning methods grounded in game theory, causality and optimization to understand and improve the social impact of AI. He has taught a tutorial at UAI and co-organised workshops at ICML and ELLIS.</p>
+        <p>Stratis is a postdoctoral researcher at HPI. He develops machine learning methods grounded in game theory, causality and optimization to understand and improve the social impact of AI. </p>
         <p class="person__links">
           <a href="https://stsirtsis.github.io/">Website</a>
           <a href="mailto:CHANGE-ME@hpi.de">Email</a>
@@ -539,17 +545,12 @@
         <img class="person__photo" src="assets/photos/manuel.jpg" alt="Manuel Gomez Rodriguez" data-initials="MG">
         <h3>Manuel Gomez Rodriguez</h3>
         <p class="person__affil">Max Planck Institute for Software Systems</p>
-        <p>Manuel is a faculty member at MPI-SWS, where he develops human-centred models and algorithms for the analysis, modelling and control of social, information and networked systems. His work has been recognised with an ERC Consolidator Grant, an ERC Starting Grant and an outstanding paper award at NeurIPS.</p>
+        <p>Manuel is a faculty member at MPI-SWS, where he develops human-centred models and algorithms for the analysis, modelling and control of social, information and networked systems.</p>
         <p class="person__links">
           <a href="https://people.mpi-sws.org/~manuelgr/">Website</a>
           <a href="mailto:manuelgr@mpi-sws.org">Email</a>
         </p>
       </div>
-    </div>
-
-    <div class="callout">
-      <h4>Who the tutorial is for</h4>
-      <p>Researchers working on generative modelling who want a clearer view of the economic forces acting on the systems they train and deploy, and researchers in game theory, mechanism design, multi-agent systems and strategic machine learning who want to see which questions this setting opens up. Practitioners working on governance and regulation should find the second and third parts directly useful.</p>
     </div>
   </div>
 </section>
@@ -559,7 +560,7 @@
 <footer class="foot">
   <div class="wrap">
     <ul>
-      <li><a href="mailto:CHANGE-ME@mpi-sws.org">Contact</a></li>
+      <li><a href="mailto:avelasco@mpi-sws.org">Contact</a></li>
       <li><a href="https://neurips.cc/">NeurIPS 2026</a></li>
       <li><a href="#materials">Materials</a></li>
     </ul>
